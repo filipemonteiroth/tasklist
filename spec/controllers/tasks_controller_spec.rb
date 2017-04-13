@@ -22,7 +22,8 @@ RSpec.describe TasksController, type: :controller do
         get :index, format: :json
         body = JSON.parse(response.body)
         expect(response.status).to eq(200)
-        expect(body.count).to eq(10)
+        expect(body["my_tasks"].size).to eq(0)
+        expect(body["other_tasks"].size).to eq(10)
       end
     end
   end

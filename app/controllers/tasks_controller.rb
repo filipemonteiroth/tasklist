@@ -7,8 +7,9 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html {}
       format.json {
-        tasks = Task.all
-        render json: tasks.as_json({includes: [:user]})
+        my_tasks = Task.my_tasks(current_user.id)
+        other_tasks = Task.other_tasks(current_user.id)
+        render json: { my_tasks: my_tasks.as_json({includes: [:user]}), other_tasks: other_tasks.as_json({includes: [:user]}) }
       }
     end
   end

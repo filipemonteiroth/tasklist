@@ -4,6 +4,14 @@ class Task < ActiveRecord::Base
 
   validates :title, presence: true
 
+  scope :my_tasks, -> (user_id) {
+    where(user_id: user_id)
+  }
+
+  scope :other_tasks, -> (user_id) {
+    where("user_id <> ? or user_id is ?", user_id, nil)
+  }
+
   def assign_to(user_id)
     raise TaskAlreadyAssigned if (self.is_assigned? && self.user_id != user_id)
     self.update({user_id: user_id})
