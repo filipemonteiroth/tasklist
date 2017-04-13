@@ -42,6 +42,16 @@ class TasksController < ApplicationController
     end
   end
 
+  def complete
+    begin
+      task = Task.find(params[:id])
+      task.complete
+      render json: {message: "Task completed"}
+    rescue => exception
+      render json: {message: "Task could not be completed"}, status: 500
+    end
+  end
+
   private
     def tasks_params
       params.permit(:title, :description)

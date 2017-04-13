@@ -86,9 +86,27 @@ RSpec.describe TasksController, type: :controller do
     end
     context "task is already assigned" do
       let(:mark) { create(:user, email: "mark@mail.com")}
-      it "should return success" do
+      it "should return error" do
         task.assign_to(mark.id)
         put :assign_to_me, {id: task.id}
+        expect(response.status).to eq(500)
+      end
+    end
+  end
+
+  describe 'PUT #complete' do
+    let(:mark) { create(:user, email: "mark@mail.com")}
+    let(:task) { create(:task) }
+    context "task is already assigned" do
+      it "should return success" do
+        task.assign_to(mark.id)
+        put :complete, {id: task.id}
+        expect(response.status).to eq(200)
+      end
+    end
+    context "task is not assigned" do
+      it "should return error" do
+        put :complete, {id: task.id}
         expect(response.status).to eq(500)
       end
     end
