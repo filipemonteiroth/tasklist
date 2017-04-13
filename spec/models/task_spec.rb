@@ -5,8 +5,10 @@ RSpec.describe Task, type: :model do
   describe "#complete" do
     context "When task is not complete" do
       let(:task) { create(:task) }
+      let(:user) { create(:user) }
       before do
         Timecop.freeze(Time.now)
+        task.assign_to(user.id)
       end
       it "should mark a task as completed" do
         task.complete
@@ -15,6 +17,12 @@ RSpec.describe Task, type: :model do
       it "should set the task completed_at" do
         task.complete
         expect(task.completed_at).to eq(Time.now)
+      end
+    end
+    context "task has no user assigned" do
+      let(:task) { create(:task) }
+      it "should not be completed if no user is assigned" do
+        expect { task.complete }.to raise_error(TaskIsNotAssigned)
       end
     end
   end

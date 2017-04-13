@@ -1,0 +1,2 @@
+class TaskIsNotAssigned < StandardError
+end

@@ -3,10 +3,13 @@ class Task < ActiveRecord::Base
   include Completable
 
   def assign_to(user_id)
-    if (self.is_assigned? && self.user_id != user_id)
-      raise TaskAlreadyAssigned
-    end
+    raise TaskAlreadyAssigned if (self.is_assigned? && self.user_id != user_id)
     self.update({user_id: user_id})
+  end
+
+  def complete
+    raise TaskIsNotAssigned if !self.is_assigned?
+    super
   end
 
   def is_assigned?
