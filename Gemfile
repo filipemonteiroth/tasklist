@@ -42,6 +42,7 @@ group :development, :test do
   gem 'timecop'
   gem "shoulda-matchers", "~> 3.1.1"
   gem 'factory_girl_rails' , "~> 4.0"
+  gem 'simplecov'
 end
 
 group :development do
