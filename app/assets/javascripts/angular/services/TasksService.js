@@ -14,6 +14,10 @@ angular.module('taskListApp').service('TasksService', ['$http', function($http) 
     return $http({method: 'put', url: '/tasks/' + task.id + '.json', data: task});
   };
 
+  tasksService.assignToMe = function(task) {
+    return $http({method: 'put', url: '/tasks/' + task.id + '/assign_to_me.json'});
+  };
+
   return tasksService;
 
 }]);

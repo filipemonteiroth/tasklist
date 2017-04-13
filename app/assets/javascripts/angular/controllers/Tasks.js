@@ -3,7 +3,8 @@ angular.module('taskListApp').controller('TasksCtrl', ['$scope', 'TasksService',
   $scope.init = function() {
     $scope.tasks = [];
     TasksService.load().then(function(response) {
-      $scope.tasks = response.data;
+      $scope.myTasks = response.data.my_tasks;
+      $scope.otherTasks = response.data.other_tasks;
     });
   };
 
@@ -28,7 +29,7 @@ angular.module('taskListApp').controller('TasksCtrl', ['$scope', 'TasksService',
     $scope.editingTask = task;
     $scope.currentTask = angular.copy(task);
     $scope.openTaskModal();
-  }
+  };
 
   $scope.saveTask = function() {
     if ($scope.currentTask.id > 0) {
@@ -47,6 +48,12 @@ angular.module('taskListApp').controller('TasksCtrl', ['$scope', 'TasksService',
         alert(data.message);
       });
     }
-  }
+  };
+
+  $scope.assingToMe = function(task, index) {
+    $scope.otherTasks.splice(index, 1);
+    $scope.myTasks.push(task);
+    TasksService.assignToMe(task);
+  };
 
 }]);

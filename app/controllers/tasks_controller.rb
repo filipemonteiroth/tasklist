@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   before_action :authenticate_user!
-  skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy]
+  skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy, :assign_to_me]
 
   def index
     respond_to do |format|
@@ -29,6 +29,16 @@ class TasksController < ApplicationController
       render json: task
     else
       render json: { message: "Hey, we ran into an error. Check your task", errors: task.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def assign_to_me
+    begin
+      task = Task.find(params[:id])
+      task.assign_to(current_user.id)
+      render json: {message: "Task assigned to you"}
+    rescue => exception
+      render json: {message: "Task could not be assigned to you"}, status: 500
     end
   end
 
