@@ -9,7 +9,7 @@ class TasksController < ApplicationController
       format.json {
         my_tasks = Task.my_tasks(current_user.id)
         other_tasks = Task.other_tasks(current_user.id)
-        render json: { my_tasks: my_tasks.as_json({includes: [:user]}), other_tasks: other_tasks.as_json({includes: [:user]}) }
+        render json: { my_tasks: my_tasks, other_tasks: other_tasks.as_json({include: [:user]}) }
       }
     end
   end

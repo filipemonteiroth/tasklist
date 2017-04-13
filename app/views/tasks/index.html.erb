@@ -14,7 +14,8 @@
 								<small>{{task.description}}</small>
 							</div>
 							<div class="task-card-actions">
-								<p ng-click="assingToMe(task, $index)">Assign to me</p>
+								<p ng-show="task.user_id === null" ng-click="assingToMe(task, $index)">Assign to me</p>
+								<p ng-show="task.user_id !== null" class="no-action">Assigned to {{task.user.email}}</p>
 								<p class="delete" ng-click="delete(otherTasks, task, $index)">Delete</p>
 							</div>
 						</div>
@@ -36,6 +37,7 @@
 							</div>
 							<div class="task-card-actions">
 								<p ng-click="complete(task)" ng-if="!task.completed">Complete</p>
+								<p ng-if="task.completed" class="no-action">Completed</p>
 								<p class="delete" ng-click="delete(myTasks, task, $index)">Delete</p>
 							</div>
 						</div>
