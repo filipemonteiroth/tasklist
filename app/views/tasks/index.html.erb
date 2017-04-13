@@ -1,7 +1,50 @@
 <div ng-controller="TasksCtrl" data-ng-init="init()">
-	<div class="row">
-		<div class="col-md-12">
-			
+	<div class="task-list-container">
+		<div class="task-list">
+			<div class="task-list-header">
+				<p class="task-list-title">To do</p>
+				<p class="task-list-add" ng-click="add()">Add</p>
+			</div>
+			<div class="task-cards-container">
+				<div class="task-card" ng-repeat="task in tasks">
+					<p>{{task.title}}</p>
+					<small>{{task.description}}</small>
+				</div>
+			</div>
 		</div>
+		<div class="task-list">
+			<div class="task-list-header">
+				<p class="task-list-title">My Tasks</p>
+			</div>
+			<div class="task-cards-container">
+				
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="task-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content task-modal">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">{{selectedTask.title || 'New task'}}</h4>
+	      </div>
+	      <div class="modal-body">
+	      	 <div class="row">
+	      	 	<div class="col-md-12 form-group">
+	      	 		<label>Title *</label>
+	      	 		<input type="text" class="form-control" ng-model="selectedTask.title" />
+	      	 	</div>
+	      	 	<div class="col-md-12 form-group">
+	      	 		<label>Description</label>
+	      	 		<textarea class="form-control" rows="3" ng-model="selectedTask.description"></textarea>
+	      	 	</div>
+	      	 </div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+	        <button type="button" class="btn btn-primary" ng-click="saveTask()">Create task</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 </div>

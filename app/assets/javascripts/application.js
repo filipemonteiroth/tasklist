@@ -13,4 +13,5 @@
 //= require jquery
 //= require app
 //= require angular/controllers/Tasks
+//= require angular/services/TasksService
 //= require_tree .
