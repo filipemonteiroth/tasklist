@@ -12,6 +12,18 @@ RSpec.describe TasksController, type: :controller do
         expect(response).to render_template(:index)
       end
     end
+
+    context "format is json" do
+      before do
+        FactoryGirl.create_list(:task, 10)
+      end
+      it "should render all tasks with possible assigned users" do
+        get :index, format: :json
+        body = JSON.parse(response.body)
+        expect(response.status).to eq(200)
+        expect(body.count).to eq(10)
+      end
+    end
   end
 
 end
