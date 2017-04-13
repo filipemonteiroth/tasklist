@@ -76,6 +76,7 @@ Deletes the task by the given `id`
 
 There's the list of the most important gems used on this project:
 
+* sqlite - Simple database, simple project :)
 * devise - For a fast and simple login
 * rspec - One of the best gems for unit and integration tests
 * timecop - You know, you got to freeze the `Time` sometimes :)
