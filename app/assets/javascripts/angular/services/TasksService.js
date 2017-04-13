@@ -10,6 +10,10 @@ angular.module('taskListApp').service('TasksService', ['$http', function($http) 
     return $http({method: 'post', url: '/tasks.json', data: task});
   };
 
+  tasksService.update = function(task) {
+    return $http({method: 'put', url: '/tasks/' + task.id + '.json', data: task});
+  };
+
   return tasksService;
 
 }]);

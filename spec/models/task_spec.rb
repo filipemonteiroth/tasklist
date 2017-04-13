@@ -1,11 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Task, type: :model do
+
+  context "Validations" do
+    it {is_expected.to validate_presence_of(:title)}
+  end
   
   describe "#complete" do
+    let(:task) { create(:task) }
+    let(:user) { create(:user) }
     context "When task is not complete" do
-      let(:task) { create(:task) }
-      let(:user) { create(:user) }
       before do
         Timecop.freeze(Time.now)
         task.assign_to(user.id)
@@ -20,7 +24,6 @@ RSpec.describe Task, type: :model do
       end
     end
     context "task has no user assigned" do
-      let(:task) { create(:task) }
       it "should not be completed if no user is assigned" do
         expect { task.complete }.to raise_error(TaskIsNotAssigned)
       end

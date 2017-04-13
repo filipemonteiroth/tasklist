@@ -6,7 +6,7 @@
 				<p class="task-list-add" ng-click="add()">Add</p>
 			</div>
 			<div class="task-cards-container">
-				<div class="task-card" ng-repeat="task in tasks">
+				<div class="task-card" ng-repeat="task in tasks" ng-click="edit(task)">
 					<p>{{task.title}}</p>
 					<small>{{task.description}}</small>
 				</div>
@@ -26,23 +26,23 @@
 	    <div class="modal-content task-modal">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">{{selectedTask.title || 'New task'}}</h4>
+	        <h4 class="modal-title">{{currentTask.title || 'New task'}}</h4>
 	      </div>
 	      <div class="modal-body">
 	      	 <div class="row">
 	      	 	<div class="col-md-12 form-group">
 	      	 		<label>Title *</label>
-	      	 		<input type="text" class="form-control" ng-model="selectedTask.title" />
+	      	 		<input type="text" class="form-control" ng-model="currentTask.title" />
 	      	 	</div>
 	      	 	<div class="col-md-12 form-group">
 	      	 		<label>Description</label>
-	      	 		<textarea class="form-control" rows="3" ng-model="selectedTask.description"></textarea>
+	      	 		<textarea class="form-control" rows="3" ng-model="currentTask.description"></textarea>
 	      	 	</div>
 	      	 </div>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-	        <button type="button" class="btn btn-primary" ng-click="saveTask()">Create task</button>
+	        <button type="button" class="btn btn-primary" ng-click="saveTask()">{{currentTask.id > 0 ? 'Save task' : 'Create task'}}</button>
 	      </div>
 	    </div>
 	  </div>

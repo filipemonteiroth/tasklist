@@ -18,7 +18,16 @@ class TasksController < ApplicationController
     if task.save
       render json: {message: "New task created"}
     else
-      render json: {message: "Hey, we ran into an error. Check your task", errors: task.errors.full_messages}
+      render json: {message: "Hey, we ran into an error. Check your task", errors: task.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    task = Task.find(params[:id])
+    if task.update(tasks_params)
+      render json: task
+    else
+      render json: { message: "Hey, we ran into an error. Check your task", errors: task.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
