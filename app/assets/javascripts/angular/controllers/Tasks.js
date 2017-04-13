@@ -56,4 +56,16 @@ angular.module('taskListApp').controller('TasksCtrl', ['$scope', 'TasksService',
     TasksService.assignToMe(task);
   };
 
+  $scope.complete = function(task) {
+    task.completed = true;
+    TasksService.complete(task);
+  };
+
+  $scope.delete = function(tasksList, task, index) {
+    if (confirm("Are you sure you want do delete?")) {
+      tasksList.splice(index, 1);
+      TasksService.delete(task);
+    }
+  };
+
 }]);

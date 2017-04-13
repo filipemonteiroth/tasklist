@@ -33,6 +33,9 @@ body {
 	justify-content: space-between;
 	align-items: center;
 }
+.task-list-header-complete {
+	text-decoration: line-through;
+}
 .task-list-add {
 	padding: 4px;
 	border-radius: 3px;
@@ -67,11 +70,17 @@ body {
 }
 .task-card-actions {
 	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
 }
 .task-card-actions p {
 	color: #1f9fda;
 	text-decoration: underline;
 	font-size: 12px;
+	margin-right: 10px;
+}
+.delete {
+	color: red !important;
 }
 .task-modal {
 	background-color: #edeff0;

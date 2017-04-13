@@ -112,4 +112,12 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  describe 'DELETE #destroy' do
+    let(:task) { create(:task) }
+    it "should return success" do
+      delete :destroy, {id: task.id}
+      expect(response.status).to eq(200)
+    end
+  end
+
 end

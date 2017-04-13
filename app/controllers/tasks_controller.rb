@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   before_action :authenticate_user!
-  skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy, :assign_to_me]
+  skip_before_filter :verify_authenticity_token, :only => [:create, :update, :destroy, :assign_to_me, :complete]
 
   def index
     respond_to do |format|
@@ -50,6 +50,12 @@ class TasksController < ApplicationController
     rescue => exception
       render json: {message: "Task could not be completed"}, status: 500
     end
+  end
+
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
+    render json: {message: "Task destroyed successfully"}
   end
 
   private
